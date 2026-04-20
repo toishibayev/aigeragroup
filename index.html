@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Gera Group — Маркетинг, ИИ и автоматизация для бизнеса</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700&family=Golos+Text:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0A0A0A;
+  --dark:#111318;
+  --card:#161A22;
+  --card2:#1C2130;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --white:#F4F4F2;
+  --muted:rgba(244,244,242,0.45);
+  --muted2:rgba(244,244,242,0.25);
+  --accent:#00E5A0;
+  --accent2:#00B87A;
+  --accent-glow:rgba(0,229,160,0.15);
+  --blue:#4D9CFF;
+  --orange:#FF7A3D;
+  --purple:#A78BFA;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Golos Text',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Unbounded',sans-serif;font-size:18px;font-weight:700;letter-spacing:-0.02em;text-decoration:none;color:var(--white)}
+.logo span{color:var(--accent)}
+.nav-tag{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.2);padding:5px 14px;border-radius:20px}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 48px 80px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,229,160,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-glow2{position:absolute;top:60%;left:20%;width:400px;height:400px;background:radial-gradient(circle,rgba(77,156,255,0.05) 0%,transparent 70%);pointer-events:none}
+.hero-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:8px;justify-content:center}
+.hero-label::before,.hero-label::after{content:'';width:24px;height:1px;background:var(--accent);opacity:0.5}
+.hero-title{font-family:'Unbounded',sans-serif;font-size:clamp(38px,6vw,80px);font-weight:700;line-height:1;letter-spacing:-0.04em;margin-bottom:12px}
+.hero-title .line2{color:var(--accent);display:block;margin-top:8px}
+.hero-sub{font-size:clamp(15px,2vw,19px);color:var(--muted);max-width:600px;margin:24px auto 0;font-weight:300;line-height:1.7}
+.hero-sub strong{color:var(--white);font-weight:500}
+.hero-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.chip{font-size:12px;padding:7px 16px;border-radius:20px;border:1px solid var(--border2);color:var(--muted);font-weight:400;letter-spacing:0.02em}
+.chip.active{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+.hero-cta{display:flex;gap:14px;justify-content:center;margin-top:40px;flex-wrap:wrap}
+.btn-accent{background:var(--accent);color:var(--black);padding:14px 32px;font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;letter-spacing:-0.01em;border:none;cursor:pointer;border-radius:8px;transition:all 0.2s;text-decoration:none;display:inline-block}
+.btn-accent:hover{background:#00ffb0;transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,229,160,0.25)}
+.btn-ghost{background:transparent;color:var(--white);padding:14px 32px;font-family:'Golos Text',sans-serif;font-size:13px;font-weight:500;border:1px solid var(--border2);cursor:pointer;border-radius:8px;transition:all 0.2s;text-decoration:none;display:inline-block}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.04)}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted2);font-size:11px;letter-spacing:0.1em;text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollpulse 2s ease-in-out infinite}
+@keyframes scrollpulse{0%,100%{opacity:0.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+
+/* SECTION COMMONS */
+.s-label{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:500}
+.s-title{font-family:'Unbounded',sans-serif;font-size:clamp(26px,3.5vw,42px);font-weight:600;line-height:1.1;letter-spacing:-0.03em;margin-bottom:16px}
+.s-sub{font-size:16px;color:var(--muted);line-height:1.7;font-weight:300;max-width:560px}
+
+/* ОПЫТ */
+.exp-wrap{background:var(--dark);padding:80px 0}
+.exp-inner{max-width:1200px;margin:0 auto;padding:0 48px}
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:48px;border-radius:12px;overflow:hidden}
+.exp-item{background:var(--dark);padding:36px 28px;text-align:center;transition:background 0.2s}
+.exp-item:hover{background:var(--card)}
+.exp-icon{width:52px;height:52px;border-radius:12px;background:var(--accent-glow);border:1px solid rgba(0,229,160,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px}
+.exp-name{font-family:'Unbounded',sans-serif;font-size:15px;font-weight:600;margin-bottom:10px;letter-spacing:-0.01em}
+.exp-desc{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
+
+/* БОЛИ */
+.problem-section{background:var(--black);padding:80px 0}
+.problem-inner{max-width:1200px;margin:0 auto;padding:0 48px}
+.problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:48px;border-radius:12px;overflow:hidden}
+.problem-item{background:var(--black);padding:36px 28px;position:relative;overflow:hidden}
+.problem-item::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent),transparent);opacity:0}
+.problem-item:hover::after{opacity:1}
+.problem-num{font-family:'Unbounded',sans-serif;font-size:36px;font-weight:700;color:var(--accent);opacity:0.15;margin-bottom:12px;line-height:1}
+.problem-text{font-size:15px;color:var(--muted);line-height:1.6;font-weight:300}
+.problem-text strong{color:var(--white);font-weight:600;display:block;margin-bottom:8px;font-size:17px}
+.problem-tag{display:inline-block;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);background:rgba(255,122,61,0.1);border:1px solid rgba(255,122,61,0.2);padding:3px 10px;border-radius:20px;margin-bottom:12px}
+
+/* ПАКЕТЫ */
+.packages-wrap{background:var(--dark);padding:80px 0}
+.packages-inner{max-width:1200px;margin:0 auto;padding:0 48px}
+.packages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.pkg-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px 32px;position:relative;transition:border-color 0.3s,transform 0.3s;overflow:hidden}
+.pkg-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,var(--accent-glow),transparent 60%);opacity:0;transition:opacity 0.3s}
+.pkg-card:hover{border-color:rgba(0,229,160,0.3);transform:translateY(-4px)}
+.pkg-card:hover::before{opacity:1}
+.pkg-card.featured{border-color:var(--accent);background:linear-gradient(160deg,#161A22 0%,#0F1A16 100%)}
+.pkg-card.featured::before{opacity:0.5}
+.pkg-badge{position:absolute;top:20px;right:20px;background:var(--accent);color:var(--black);font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.08em;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.pkg-tag{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted2);margin-bottom:14px;font-weight:500}
+.pkg-name{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.02em;margin-bottom:8px}
+.pkg-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:24px;font-weight:300}
+.pkg-price{font-family:'Unbounded',sans-serif;font-size:34px;font-weight:700;letter-spacing:-0.03em;margin-bottom:4px}
+.pkg-price-note{font-size:12px;color:var(--muted2);margin-bottom:24px}
+.pkg-divider{height:1px;background:var(--border);margin-bottom:20px}
+.pkg-items{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.pkg-items li{font-size:13px;color:rgba(244,244,242,0.7);display:flex;align-items:flex-start;gap:10px;font-weight:300;line-height:1.5}
+.pkg-items li .icon{width:18px;height:18px;border-radius:50%;background:var(--accent-glow);border:1px solid rgba(0,229,160,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.pkg-items li .icon svg{width:9px;height:9px}
+.pkg-result{background:rgba(0,229,160,0.05);border:1px solid rgba(0,229,160,0.15);border-radius:8px;padding:14px 16px;margin-top:4px}
+.pkg-result-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:500}
+.pkg-result-items{display:flex;flex-direction:column;gap:4px}
+.pkg-result-item{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.pkg-result-item span{color:var(--accent);font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600}
+
+/* ДЕТАЛИ ТАРИФОВ */
+.detail-wrap{background:var(--black);padding:80px 0}
+.detail-inner{max-width:1200px;margin:0 auto;padding:0 48px}
+.detail-tabs{display:flex;gap:8px;margin-top:36px;margin-bottom:48px;flex-wrap:wrap}
+.detail-tab{font-size:13px;padding:10px 22px;border-radius:8px;border:1px solid var(--border2);color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:'Golos Text',sans-serif;background:transparent}
+.detail-tab.active{background:var(--accent);color:var(--black);border-color:var(--accent);font-weight:600}
+.detail-panel{display:none;animation:fadeUp 0.3s ease}
+.detail-panel.active{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.detail-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px}
+.detail-card-icon{font-size:24px;margin-bottom:14px}
+.detail-card-title{font-size:15px;font-weight:600;margin-bottom:10px}
+.detail-card-desc{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;margin-bottom:16px}
+.detail-card-result{display:flex;align-items:center;gap:10px;padding-top:14px;border-top:1px solid var(--border)}
+.detail-result-num{font-family:'Unbounded',sans-serif;font-size:22px;font-weight:700;color:var(--accent)}
+.detail-result-text{font-size:12px;color:var(--muted);line-height:1.4}
+
+/* СРАВНЕНИЕ */
+.why-wrap{background:var(--dark);padding:80px 0}
+.why-inner{max-width:1200px;margin:0 auto;padding:0 48px}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:48px}
+.why-list{display:flex;flex-direction:column;gap:0}
+.why-item{padding:24px 0;border-bottom:1px solid var(--border);display:flex;gap:20px;align-items:flex-start}
+.why-num{font-family:'Unbounded',sans-serif;font-size:13px;font-weight:700;color:var(--accent);opacity:0.5;min-width:28px;margin-top:2px}
+.why-content h4{font-size:16px;font-weight:500;margin-bottom:6px}
+.why-content p{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
+.why-visual{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:0}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border)}
+.stat-row:last-child{border-bottom:none}
+.stat-label-text{font-size:13px;color:var(--muted);font-weight:300}
+.stat-value{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:700}
+.stat-value.green{color:var(--accent)}
+.stat-value.blue{color:var(--blue)}
+.stat-value.orange{color:var(--orange)}
+
+/* МЕТРИКИ */
+.metrics-wrap{background:var(--black);padding:80px 0}
+.metrics-inner{max-width:1200px;margin:0 auto;padding:0 48px}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px 24px;text-align:center;transition:border-color 0.2s,transform 0.2s}
+.metric-card:hover{border-color:rgba(0,229,160,0.3);transform:translateY(-3px)}
+.metric-num{font-family:'Unbounded',sans-serif;font-size:36px;font-weight:700;color:var(--accent);line-height:1;margin-bottom:8px}
+.metric-label{font-size:13px;color:var(--muted);line-height:1.5;font-weight:300}
+.metric-sub{font-size:11px;color:var(--muted2);margin-top:4px;letter-spacing:0.04em}
+
+/* ПРОЦЕСС */
+.process-wrap{background:var(--dark);padding:80px 0}
+.process-inner{max-width:1200px;margin:0 auto;padding:0 48px}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:48px;position:relative}
+.process-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(to right,var(--accent),var(--blue),var(--accent));opacity:0.2}
+.process-step{text-align:center;padding:0 12px}
+.step-circle{width:56px;height:56px;border-radius:50%;border:1px solid var(--border2);background:var(--card);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:'Unbounded',sans-serif;font-size:14px;font-weight:700;color:var(--accent);position:relative;z-index:1}
+.step-title{font-size:13px;font-weight:500;margin-bottom:6px;line-height:1.3}
+.step-desc{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* CTA */
+.cta-final{background:var(--black);padding:80px 48px;text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(0,229,160,0.06) 0%,transparent 70%);pointer-events:none}
+.cta-inner{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.cta-title{font-family:'Unbounded',sans-serif;font-size:clamp(30px,4vw,52px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin-bottom:20px}
+.cta-title span{color:var(--accent)}
+.cta-sub{font-size:16px;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:40px}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.cta-contacts{display:flex;gap:40px;justify-content:center;margin-top:48px;padding-top:40px;border-top:1px solid var(--border);flex-wrap:wrap}
+.contact-item .c-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:4px}
+.contact-item .c-value{font-size:15px;font-weight:500;color:var(--white)}
+
+/* FOOTER */
+footer{background:var(--dark);padding:32px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:'Unbounded',sans-serif;font-size:16px;font-weight:700}
+.footer-logo span{color:var(--accent)}
+.footer-copy{font-size:12px;color:var(--muted2)}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-in.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
+
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .hero{padding:80px 20px 60px}
+  .exp-grid,.problem-grid,.packages-grid,.metrics-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr;gap:24px}
+  .process-steps::before{display:none}
+  .detail-panel.active{grid-template-columns:1fr}
+  .exp-inner,.problem-inner,.packages-inner,.detail-inner,.why-inner,.metrics-inner,.process-inner{padding:0 20px}
+  .cta-final{padding:60px 20px}
+  footer{padding:24px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">AI <span>Gera</span> Group</a>
+  <div class="nav-tag">Казахстан · 2026</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-label">AI Gera Group · Digital Agency · Казахстан</div>
+  <h1 class="hero-title">
+    Комплексный маркетинг,<br>
+    <span class="line2">ИИ и автоматизация</span>
+  </h1>
+  <p class="hero-sub">
+    Помогаем бизнесу в Казахстане <strong>увеличить доход ×2</strong> — через умные воронки продаж, ИИ-ботов и системную упаковку.
+  </p>
+  <div class="hero-chips">
+    <span class="chip active">ИИ-автоматизация</span>
+    <span class="chip">Маркетинг</span>
+    <span class="chip">CRM-интеграция</span>
+    <span class="chip">Instagram & Лендинг</span>
+    <span class="chip">Воронки продаж</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#cta" class="btn-accent">Получить консультацию</a>
+    <a href="#packages" class="btn-ghost">Смотреть тарифы</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Листайте</span>
+  </div>
+</div>
+
+<!-- НАШ ОПЫТ -->
+<div class="exp-wrap">
+  <div class="exp-inner">
+    <div class="fade-in">
+      <div class="s-label">Наша экспертиза</div>
+      <h2 class="s-title">4 направления, которые<br>дают результат</h2>
+    </div>
+    <div class="exp-grid fade-in d1">
+      <div class="exp-item">
+        <div class="exp-icon">📈</div>
+        <div class="exp-name">Продажи</div>
+        <div class="exp-desc">Выстраиваем систему продаж: скрипты, воронки, обучение команды и интеграция связок, которые конвертируют.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-icon">🎯</div>
+        <div class="exp-name">Маркетинг</div>
+        <div class="exp-desc">Разрабатываем маркетинговую стратегию, запускаем кампании и настраиваем аналитику для роста охватов и заявок.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-icon">🤖</div>
+        <div class="exp-name">Программирование</div>
+        <div class="exp-desc">Создаём ИИ-ботов, чат-ботов, лендинги и CRM-интеграции под задачи конкретного бизнеса.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-icon">⚙️</div>
+        <div class="exp-name">Управление</div>
+        <div class="exp-desc">Автоматизируем бизнес-процессы и настраиваем операционку так, чтобы она работала без участия владельца.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- БОЛИ -->
+<div class="problem-section">
+  <div class="problem-inner">
+    <div class="fade-in">
+      <div class="s-label">Мы проанализировали рынок</div>
+      <h2 class="s-title">Какие боли мы<br>закрываем</h2>
+    </div>
+    <div class="problem-grid fade-in d1">
+      <div class="problem-item">
+        <div class="problem-tag">Деньги</div>
+        <div class="problem-num">01</div>
+        <div class="problem-text">
+          <strong>Слив бюджета на рекламу</strong>
+          Таргет и реклама работают вхолостую — нет воронки, которая превращает трафик в покупателей.
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-tag">Доверие</div>
+        <div class="problem-num">02</div>
+        <div class="problem-text">
+          <strong>Слабая упаковка бизнеса</strong>
+          Instagram и сайт не вызывают доверия у премиум-сегмента. Клиент уходит, не написав.
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-tag">Операционка</div>
+        <div class="problem-num">03</div>
+        <div class="problem-text">
+          <strong>Человеческий фактор</strong>
+          Менеджеры забывают перезванивать, CRM пустует, заявки теряются — бизнес живёт на ощущениях.
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-tag">Маркетинг</div>
+        <div class="problem-num">04</div>
+        <div class="problem-text">
+          <strong>Воронка продаж</strong>
+          Бизнесы применяют слабые маркетинговые кампаний, которые не приносят квалифицированных лидов
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- ПАКЕТЫ -->
+<div class="packages-wrap" id="packages">
+  <div class="packages-inner">
+    <div class="fade-in">
+      <div class="s-label">Решение AI Gera Group</div>
+      <h2 class="s-title">Три тарифа —<br>под любую стадию бизнеса</h2>
+      <p class="s-sub">Каждый пакет — это законченная система, а не набор отдельных услуг.</p>
+    </div>
+    <div class="packages-grid">
+
+      <!-- ТАРИФ 1 -->
+      <div class="pkg-card fade-in d1">
+        <div class="pkg-tag">Тариф 01</div>
+        <div class="pkg-name">Быстрый старт</div>
+        <div class="pkg-desc">Для тех, кто хочет системно выйти на рынок и получить первые заявки.</div>
+        <div class="pkg-price">250 000 ₸</div>
+        <div class="pkg-price-note">разовый платёж · без скрытых условий</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>Аналитика маркетинга и продаж</li>
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>Интеграция маркетинговых кампаний</li>
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>Переоформление Instagram (Highlights, Reels-сетка, био)</li>
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>Лендинг-страница с интеграцией</li>
+        </ul>
+        <div class="pkg-result">
+          <div class="pkg-result-label">Ваши результаты</div>
+          <div class="pkg-result-items">
+            <div class="pkg-result-item">Оборот увеличивается на <span>+18%</span></div>
+            <div class="pkg-result-item">Таргет окупается выше на <span>+30%</span></div>
+            <div class="pkg-result-item">Конверсия увеличивается на <span>+13%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ТАРИФ 2 — FEATURED -->
+      <div class="pkg-card featured fade-in d2">
+        <div class="pkg-badge">Хит</div>
+        <div class="pkg-tag">Тариф 02</div>
+        <div class="pkg-name">Автопилот</div>
+        <div class="pkg-desc">Для бизнеса, который хочет расти без найма новых людей и ручной работы.</div>
+        <div class="pkg-price">450 000 ₸</div>
+        <div class="pkg-price-note">разовый платёж · + подписка на бота от 15 000 ₸/мес</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>Всё из тарифа «Быстрый старт»</li>
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>Стратегия контента на 3 месяца</li>
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>Базовая автоматизация процессов</li>
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>ИИ-бот и чат-бот в Telegram</li>
+        </ul>
+        <div class="pkg-result">
+          <div class="pkg-result-label">Ваши результаты</div>
+          <div class="pkg-result-items">
+            <div class="pkg-result-item">Охваты увеличиваются на <span>+40%</span></div>
+            <div class="pkg-result-item">Конверсия повышается на <span>+30%</span></div>
+            <div class="pkg-result-item">Продажи увеличиваются в <span>×1.5</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ТАРИФ 3 -->
+      <div class="pkg-card fade-in d3">
+        <div class="pkg-tag">Тариф 03</div>
+        <div class="pkg-name">Технологический стек</div>
+        <div class="pkg-desc">Для тех, кто готов к серьёзному масштабированию с полной цифровой экосистемой.</div>
+        <div class="pkg-price">790 000 ₸</div>
+        <div class="pkg-price-note">разовый платёж · сопровождение обсуждается</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-items">
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>Всё из тарифа «Автопилот»</li>
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>CRM-интеграция под ваш бизнес</li>
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>Таргетированная реклама (запуск + ведение)</li>
+          <li><span class="icon"><svg viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#00E5A0" stroke-width="1.5" stroke-linecap="round"/></svg></span>Автоматизация всей воронки продаж</li>
+        </ul>
+        <div class="pkg-result">
+          <div class="pkg-result-label">Ваши результаты</div>
+          <div class="pkg-result-items">
+            <div class="pkg-result-item">Охваты увеличиваются на <span>+40%</span></div>
+            <div class="pkg-result-item">Конверсия повышается на <span>+30%</span></div>
+            <div class="pkg-result-item">Продажи увеличиваются в <span>×1.5</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ДЕТАЛИ ТАРИФОВ -->
+<div class="detail-wrap">
+  <div class="detail-inner">
+    <div class="fade-in">
+      <div class="s-label">Что конкретно мы делаем</div>
+      <h2 class="s-title">Результат по каждой<br>услуге</h2>
+    </div>
+    <div class="detail-tabs">
+      <button class="detail-tab active" onclick="showTab('t1',this)">Тариф 1 — Быстрый старт</button>
+      <button class="detail-tab" onclick="showTab('t2',this)">Тариф 2 — Автопилот</button>
+      <button class="detail-tab" onclick="showTab('t3',this)">Тариф 3 — Технологический стек</button>
+    </div>
+
+    <div class="detail-panel active" id="t1">
+      <div class="detail-card fade-in">
+        <div class="detail-card-icon">📊</div>
+        <div class="detail-card-title">Аналитика маркетинга и воронок</div>
+        <div class="detail-card-desc">Анализируем текущие маркетинговые воронки, интегрируем новые и обучаем ваших сотрудников продажам.</div>
+        <div class="detail-card-result">
+          <div class="detail-result-num">+18%</div>
+          <div class="detail-result-text">увеличение оборота<br>в первые 60 дней</div>
+        </div>
+      </div>
+      <div class="detail-card fade-in d1">
+        <div class="detail-card-icon">📱</div>
+        <div class="detail-card-title">Переоформление Instagram</div>
+        <div class="detail-card-desc">Меняем вид страницы вашего бизнеса: Highlights, Reels-сетка, Bio, визуальный стиль. Помогаем интегрировать новые маркетинговые связки.</div>
+        <div class="detail-card-result">
+          <div class="detail-result-num">+30%</div>
+          <div class="detail-result-text">таргет окупается<br>выше среднего</div>
+        </div>
+      </div>
+      <div class="detail-card fade-in d2">
+        <div class="detail-card-icon">🌐</div>
+        <div class="detail-card-title">Лендинг-страница бизнеса</div>
+        <div class="detail-card-desc">Добавляем в воронку лендинг с перечнем услуг, прайсом и формой записи. Полная интеграция с маркетинговыми каналами.</div>
+        <div class="detail-card-result">
+          <div class="detail-result-num">+13%</div>
+          <div class="detail-result-text">увеличение конверсии<br>с холодного трафика</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-panel" id="t2">
+      <div class="detail-card fade-in">
+        <div class="detail-card-icon">📅</div>
+        <div class="detail-card-title">Стратегия контента на 3 месяца</div>
+        <div class="detail-card-desc">Прописываем персональный контент-план с маркетинговыми стратегиями продаж — темы, форматы, сценарии Reels и рубрики.</div>
+        <div class="detail-card-result">
+          <div class="detail-result-num">+40%</div>
+          <div class="detail-result-text">охваты в Instagram<br>за 3 месяца</div>
+        </div>
+      </div>
+      <div class="detail-card fade-in d1">
+        <div class="detail-card-icon">⚡</div>
+        <div class="detail-card-title">Базовая автоматизация</div>
+        <div class="detail-card-desc">Таблицы для точной аналитики базовых конверсий. Обученные Telegram-боты, которые автоматически выдают отчёты.</div>
+        <div class="detail-card-result">
+          <div class="detail-result-num">+30%</div>
+          <div class="detail-result-text">конверсия повышается<br>за счёт скорости</div>
+        </div>
+      </div>
+      <div class="detail-card fade-in d2">
+        <div class="detail-card-icon">🤖</div>
+        <div class="detail-card-title">ИИ-бот и чат-бот</div>
+        <div class="detail-card-desc">Подключаем ИИ-менеджера по продажам, обученного под ваш бизнес. Отвечает на вопросы, квалифицирует лиды и записывает клиентов 24/7.</div>
+        <div class="detail-card-result">
+          <div class="detail-result-num">×1.5</div>
+          <div class="detail-result-text">увеличение продаж<br>без найма людей</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-panel" id="t3">
+      <div class="detail-card fade-in">
+        <div class="detail-card-icon">🗂️</div>
+        <div class="detail-card-title">CRM-интеграция</div>
+        <div class="detail-card-desc">Настраиваем CRM под ваши процессы: все клиенты, сделки и задачи в одном месте. Никаких потерянных заявок и забытых звонков.</div>
+        <div class="detail-card-result">
+          <div class="detail-result-num">+40%</div>
+          <div class="detail-result-text">охваты и управляемость<br>клиентской базы</div>
+        </div>
+      </div>
+      <div class="detail-card fade-in d1">
+        <div class="detail-card-icon">🎯</div>
+        <div class="detail-card-title">Таргетированная реклама</div>
+        <div class="detail-card-desc">Запуск и ведение таргета в Instagram и других каналах. A/B тесты, аналитика по креативам, ежемесячные отчёты с выводами.</div>
+        <div class="detail-card-result">
+          <div class="detail-result-num">+30%</div>
+          <div class="detail-result-text">конверсия с платного<br>трафика</div>
+        </div>
+      </div>
+      <div class="detail-card fade-in d2">
+        <div class="detail-card-icon">🔗</div>
+        <div class="detail-card-title">Автоматизация воронки продаж</div>
+        <div class="detail-card-desc">Автоматизируем все подключённые услуги так, чтобы они работали как один механизм: трафик → бот → CRM → продажа → отчёт.</div>
+        <div class="detail-card-result">
+          <div class="detail-result-num">×1.5</div>
+          <div class="detail-result-text">рост продаж без<br>увеличения штата</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- МЕТРИКИ -->
+<div class="metrics-wrap">
+  <div class="metrics-inner">
+    <div class="fade-in" style="text-align:center">
+      <div class="s-label" style="justify-content:center;display:flex">Результаты клиентов</div>
+      <h2 class="s-title" style="text-align:center">Цифры, которые говорят сами</h2>
+    </div>
+    <div class="metrics-grid fade-in d1">
+      <div class="metric-card">
+        <div class="metric-num">5 млн</div>
+        <div class="metric-label">Показов рекламных кампаний</div>
+        <div class="metric-sub">за последние 3 месяца</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">8%</div>
+        <div class="metric-label">Средний Engagement Rate</div>
+        <div class="metric-sub">при норме по рынку 3–4%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">×1.5</div>
+        <div class="metric-label">Рост продаж с ИИ-ботом</div>
+        <div class="metric-sub">без найма новых менеджеров</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">14 дней</div>
+        <div class="metric-label">Срок запуска базового пакета</div>
+        <div class="metric-sub">от договора до первых лидов</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ПОЧЕМУ МЫ -->
+<div class="why-wrap">
+  <div class="why-inner">
+    <div class="fade-in">
+      <div class="s-label">Почему AI Gera Group</div>
+      <h2 class="s-title">Аргументы, которые<br>решают</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-list fade-in d1">
+        <div class="why-item">
+          <div class="why-num">01</div>
+          <div class="why-content">
+            <h4>Один ИИ -бот = три менеджера по продажам</h4>
+            <p>Бот помогает отделу продаж отвечать 24/7, продавать услуги или товары и отправлять рассылки по всей базе клиентов.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">02</div>
+          <div class="why-content">
+            <h4>В Казахстане побеждает упаковка</h4>
+            <p>Местная аудитория покупает глазами. Если Instagram выглядит дёшево или непонятно - потенциал бизнеса не раскрыт.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">03</div>
+          <div class="why-content">
+            <h4>Умные воронки, а не просто таргет</h4>
+            <p>В 2026-м одна реклама не работает. Нужна система: трафик → упаковка → бот → CRM → продажа.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">04</div>
+          <div class="why-content">
+            <h4>Мы раскрываем потенциал Вашего бизнеса, работая под ключ</h4>
+            <p>Мы берём на себя стратегию, реализацию и настройку. Ваша задача - принять клиентов и заниматься стратегическими вопросами бизнеса.</p>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual fade-in d2">
+        <div style="font-size:13px;color:var(--muted2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;padding-bottom:16px;border-bottom:1px solid var(--border)">Сравнение затрат</div>
+        <div class="stat-row">
+          <div class="stat-label-text">Без системы</div>
+          <div class="stat-value orange">Потери растут</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label-text">Система увеличивает оборот в общем на</div>
+          <div class="stat-value green">40%+</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label-text">Экономия в год</div>
+          <div class="stat-value green">2 220 000 ₸</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label-text">Время ответа клиенту</div>
+          <div class="stat-value blue">&lt; 3 сек</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label-text">Доступность</div>
+          <div class="stat-value green">24 / 7 / 365</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ПРОЦЕСС -->
+<div class="process-wrap">
+  <div class="process-inner">
+    <div class="fade-in" style="text-align:center">
+      <div class="s-label" style="justify-content:center;display:flex">Как мы работаем</div>
+      <h2 class="s-title" style="text-align:center">От договора до первых лидов</h2>
+    </div>
+    <div class="process-steps fade-in d1">
+      <div class="process-step">
+        <div class="step-circle">01</div>
+        <div class="step-title">Аудит и стратегия</div>
+        <div class="step-desc">Разбираем ваш бизнес, конкурентов и целевую аудиторию</div>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">02</div>
+        <div class="step-title">Упаковка</div>
+        <div class="step-desc">Instagram, Landing, смыслы и визуальный стиль</div>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">03</div>
+        <div class="step-title">Система продаж</div>
+        <div class="step-desc">Воронки, ИИ-боты, CRM по выбранному тарифу</div>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">04</div>
+        <div class="step-title">Трафик</div>
+        <div class="step-desc">Запуск рекламы и получение первых лидов</div>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">05</div>
+        <div class="step-title">Рост</div>
+        <div class="step-desc">Аналитика, A/B тесты, масштабирование</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-final" id="cta">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <div class="fade-in">
+      <div class="s-label" style="justify-content:center;display:flex">Следующий шаг</div>
+      <h2 class="cta-title">Готовы запустить <span>систему</span>?</h2>
+      <p class="cta-sub">Проведём бесплатный разбор вашего бизнеса и подберём оптимальный тариф. Без давления и обязательств.</p>
+      <div class="cta-buttons">
+        <a href="https://t.me/aigeragroup" class="btn-accent">Написать в Telegram →</a>
+        <a href="tel:+7" class="btn-ghost">Позвонить нам</a>
+      </div>
+      <div class="cta-contacts">
+        <div class="contact-item">
+          <div class="c-label">Telegram</div>
+          <div class="c-value">@aigeragroup</div>
+        </div>
+        <div class="contact-item">
+          <div class="c-label">Instagram</div>
+          <div class="c-value">@aigeragroup</div>
+        </div>
+        <div class="contact-item">
+          <div class="c-label">Email</div>
+          <div class="c-value">gerameiyr@gmail.com</div>
+        </div>
+        <div class="contact-item">
+          <div class="c-label">WhatsApp</div>
+          <div class="c-value">+7 776 948 74 19</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AI <span>Gera</span> Group</div>
+  <div class="footer-copy">© 2026 AI Gera Group · Все права защищены · Астана, Казахстан</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis') });
+}, {threshold: 0.1});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+function showTab(id, btn) {
+  document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.detail-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById(id).querySelectorAll('.fade-in').forEach(el => {
+    el.classList.remove('vis');
+    setTimeout(() => el.classList.add('vis'), 50);
+  });
+}
+</script>
+</body>
+</html>
